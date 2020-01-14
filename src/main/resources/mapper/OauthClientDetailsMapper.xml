@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yifan.po.OauthClientDetailsPo">
+	<resultMap id="BaseResultMap" type="com.yifan.po.OauthClientDetailsPo">
+		<id column="client_id" property="clientId" />
+		<result column="resource_ids" property="resourceIds" />
+		<result column="client_secret" property="clientSecret" />
+		<result column="scope" property="scope" />
+		<result column="authorized_grant_types" property="authorizedGrantTypes" />
+		<result column="web_server_redirect_uri" property="webServerRedirectUri" />
+		<result column="authorities" property="authorities" />
+		<result column="access_token_validity" property="accessTokenValidity" />
+		<result column="refresh_token_validity" property="refreshTokenValidity" />
+		<result column="additional_information" property="additionalInformation" />
+		<result column="autoapprove" property="autoapprove" />
+	</resultMap>
+
+	<sql id="Table_Name">
+		oauth_client_details
+	</sql>
+
+	<sql id="Base_Column">
+		client_id,
+		resource_ids,
+		client_secret,
+		scope,
+		authorized_grant_types,
+		web_server_redirect_uri,
+		authorities,
+		access_token_validity,
+		refresh_token_validity,
+		additional_information,
+		autoapprove
+	</sql>
+
+	<sql id="Base_Where">
+	    <trim prefixOverrides="AND">
+		  <if test="clientId != null">
+            AND client_id = #{clientId}
+		  </if>
+		  <if test="resourceIds != null">
+            AND resource_ids = #{resourceIds}
+		  </if>
+		  <if test="clientSecret != null">
+            AND client_secret = #{clientSecret}
+		  </if>
+		  <if test="scope != null">
+            AND scope = #{scope}
+		  </if>
+		  <if test="authorizedGrantTypes != null">
+            AND authorized_grant_types = #{authorizedGrantTypes}
+		  </if>
+		  <if test="webServerRedirectUri != null">
+            AND web_server_redirect_uri = #{webServerRedirectUri}
+		  </if>
+		  <if test="authorities != null">
+            AND authorities = #{authorities}
+		  </if>
+		  <if test="accessTokenValidity != null">
+            AND access_token_validity = #{accessTokenValidity}
+		  </if>
+		  <if test="refreshTokenValidity != null">
+            AND refresh_token_validity = #{refreshTokenValidity}
+		  </if>
+		  <if test="additionalInformation != null">
+            AND additional_information = #{additionalInformation}
+		  </if>
+		  <if test="autoapprove != null">
+            AND autoapprove = #{autoapprove}
+		  </if>
+	    </trim>
+	</sql>
+	
+    <sql id="Base_Select">
+	    select
+		  <include refid="Base_Column" />
+		from
+		  <include refid="Table_Name" />
+		<where>
+		  <include refid="Base_Where" />
+		</where>
+	</sql>
+
+	<insert id="insert" parameterType="com.yifan.po.OauthClientDetailsPo" useGeneratedKeys="true" keyProperty="clientId">
+	    insert into <include refid="Table_Name" />
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="clientId != null">
+            client_id,
+          </if>
+          <if test="resourceIds != null">
+            resource_ids,
+          </if>
+          <if test="clientSecret != null">
+            client_secret,
+          </if>
+          <if test="scope != null">
+            scope,
+          </if>
+          <if test="authorizedGrantTypes != null">
+            authorized_grant_types,
+          </if>
+          <if test="webServerRedirectUri != null">
+            web_server_redirect_uri,
+          </if>
+          <if test="authorities != null">
+            authorities,
+          </if>
+          <if test="accessTokenValidity != null">
+            access_token_validity,
+          </if>
+          <if test="refreshTokenValidity != null">
+            refresh_token_validity,
+          </if>
+          <if test="additionalInformation != null">
+            additional_information,
+          </if>
+          <if test="autoapprove != null">
+            autoapprove,
+          </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+	      <if test="clientId != null">
+		    #{clientId},
+	      </if>
+	      <if test="resourceIds != null">
+		    #{resourceIds},
+	      </if>
+	      <if test="clientSecret != null">
+		    #{clientSecret},
+	      </if>
+	      <if test="scope != null">
+		    #{scope},
+	      </if>
+	      <if test="authorizedGrantTypes != null">
+		    #{authorizedGrantTypes},
+	      </if>
+	      <if test="webServerRedirectUri != null">
+		    #{webServerRedirectUri},
+	      </if>
+	      <if test="authorities != null">
+		    #{authorities},
+	      </if>
+	      <if test="accessTokenValidity != null">
+		    #{accessTokenValidity},
+	      </if>
+	      <if test="refreshTokenValidity != null">
+		    #{refreshTokenValidity},
+	      </if>
+	      <if test="additionalInformation != null">
+		    #{additionalInformation},
+	      </if>
+	      <if test="autoapprove != null">
+		    #{autoapprove},
+	      </if>
+        </trim>
+	</insert>
+	
+    <insert id="insertList" parameterType="java.util.List">
+	    insert into <include refid="Table_Name" />
+          (
+            resource_ids,
+            client_secret,
+            scope,
+            authorized_grant_types,
+            web_server_redirect_uri,
+            authorities,
+            access_token_validity,
+            refresh_token_validity,
+            additional_information,
+            autoapprove
+          ) 
+	      values
+	    <foreach collection="list" item="item" separator=",">
+          (
+            #{item.resourceIds},
+            #{item.clientSecret},
+            #{item.scope},
+            #{item.authorizedGrantTypes},
+            #{item.webServerRedirectUri},
+            #{item.authorities},
+            #{item.accessTokenValidity},
+            #{item.refreshTokenValidity},
+            #{item.additionalInformation},
+            #{item.autoapprove}
+          )
+        </foreach>
+	</insert>
+
+	<update id="update" parameterType="com.yifan.po.OauthClientDetailsPo">
+	    update <include refid="Table_Name" />
+	    <set>
+        <if test="resourceIds != null">
+          resource_ids = #{resourceIds},
+        </if>
+        <if test="clientSecret != null">
+          client_secret = #{clientSecret},
+        </if>
+        <if test="scope != null">
+          scope = #{scope},
+        </if>
+        <if test="authorizedGrantTypes != null">
+          authorized_grant_types = #{authorizedGrantTypes},
+        </if>
+        <if test="webServerRedirectUri != null">
+          web_server_redirect_uri = #{webServerRedirectUri},
+        </if>
+        <if test="authorities != null">
+          authorities = #{authorities},
+        </if>
+        <if test="accessTokenValidity != null">
+          access_token_validity = #{accessTokenValidity},
+        </if>
+        <if test="refreshTokenValidity != null">
+          refresh_token_validity = #{refreshTokenValidity},
+        </if>
+        <if test="additionalInformation != null">
+          additional_information = #{additionalInformation},
+        </if>
+        <if test="autoapprove != null">
+          autoapprove = #{autoapprove},
+        </if>
+	    </set>
+	    where client_id = #{clientId}
+	</update>
+	
+	<select id="count" parameterType="com.yifan.po.OauthClientDetailsPo" resultType="java.lang.Integer">
+	    select count(1) from <include refid="Table_Name" />
+	    <where>
+	      <include refid="Base_Where" />
+	    </where>
+	</select>
+
+	<select id="selectOne" parameterType="com.yifan.po.OauthClientDetailsPo" resultMap="BaseResultMap">
+	    <include refid="Base_Select" />
+	</select>
+	
+	<select id="selectById" parameterType="String" resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column" />
+	    from <include refid="Table_Name" />
+	    where client_id = #{clientId}
+	</select>
+
+	<select id="selectList" parameterType="com.yifan.po.OauthClientDetailsPo" resultMap="BaseResultMap">
+	    <include refid="Base_Select" />
+	</select>
+	
+	<delete id="deleteById" parameterType="String">
+	    delete from <include refid="Table_Name" />
+        where client_id = #{clientId}
+	</delete>
+	
+</mapper>

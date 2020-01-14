@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yifan.po.ClientDetailsPo">
+	<resultMap id="BaseResultMap" type="com.yifan.po.ClientDetailsPo">
+		<id column="appId" property="appId" />
+		<result column="resourceIds" property="resourceIds" />
+		<result column="appSecret" property="appSecret" />
+		<result column="scope" property="scope" />
+		<result column="grantTypes" property="grantTypes" />
+		<result column="redirectUrl" property="redirectUrl" />
+		<result column="authorities" property="authorities" />
+		<result column="access_token_validity" property="accessTokenValidity" />
+		<result column="refresh_token_validity" property="refreshTokenValidity" />
+		<result column="additionalInformation" property="additionalInformation" />
+		<result column="autoApproveScopes" property="autoApproveScopes" />
+	</resultMap>
+
+	<sql id="Table_Name">
+		client_details
+	</sql>
+
+	<sql id="Base_Column">
+		appId,
+		resourceIds,
+		appSecret,
+		scope,
+		grantTypes,
+		redirectUrl,
+		authorities,
+		access_token_validity,
+		refresh_token_validity,
+		additionalInformation,
+		autoApproveScopes
+	</sql>
+
+	<sql id="Base_Where">
+	    <trim prefixOverrides="AND">
+		  <if test="appId != null">
+            AND appId = #{appId}
+		  </if>
+		  <if test="resourceIds != null">
+            AND resourceIds = #{resourceIds}
+		  </if>
+		  <if test="appSecret != null">
+            AND appSecret = #{appSecret}
+		  </if>
+		  <if test="scope != null">
+            AND scope = #{scope}
+		  </if>
+		  <if test="grantTypes != null">
+            AND grantTypes = #{grantTypes}
+		  </if>
+		  <if test="redirectUrl != null">
+            AND redirectUrl = #{redirectUrl}
+		  </if>
+		  <if test="authorities != null">
+            AND authorities = #{authorities}
+		  </if>
+		  <if test="accessTokenValidity != null">
+            AND access_token_validity = #{accessTokenValidity}
+		  </if>
+		  <if test="refreshTokenValidity != null">
+            AND refresh_token_validity = #{refreshTokenValidity}
+		  </if>
+		  <if test="additionalInformation != null">
+            AND additionalInformation = #{additionalInformation}
+		  </if>
+		  <if test="autoApproveScopes != null">
+            AND autoApproveScopes = #{autoApproveScopes}
+		  </if>
+	    </trim>
+	</sql>
+	
+    <sql id="Base_Select">
+	    select
+		  <include refid="Base_Column" />
+		from
+		  <include refid="Table_Name" />
+		<where>
+		  <include refid="Base_Where" />
+		</where>
+	</sql>
+
+	<insert id="insert" parameterType="com.yifan.po.ClientDetailsPo" useGeneratedKeys="true" keyProperty="appId">
+	    insert into <include refid="Table_Name" />
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="appId != null">
+            appId,
+          </if>
+          <if test="resourceIds != null">
+            resourceIds,
+          </if>
+          <if test="appSecret != null">
+            appSecret,
+          </if>
+          <if test="scope != null">
+            scope,
+          </if>
+          <if test="grantTypes != null">
+            grantTypes,
+          </if>
+          <if test="redirectUrl != null">
+            redirectUrl,
+          </if>
+          <if test="authorities != null">
+            authorities,
+          </if>
+          <if test="accessTokenValidity != null">
+            access_token_validity,
+          </if>
+          <if test="refreshTokenValidity != null">
+            refresh_token_validity,
+          </if>
+          <if test="additionalInformation != null">
+            additionalInformation,
+          </if>
+          <if test="autoApproveScopes != null">
+            autoApproveScopes,
+          </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+	      <if test="appId != null">
+		    #{appId},
+	      </if>
+	      <if test="resourceIds != null">
+		    #{resourceIds},
+	      </if>
+	      <if test="appSecret != null">
+		    #{appSecret},
+	      </if>
+	      <if test="scope != null">
+		    #{scope},
+	      </if>
+	      <if test="grantTypes != null">
+		    #{grantTypes},
+	      </if>
+	      <if test="redirectUrl != null">
+		    #{redirectUrl},
+	      </if>
+	      <if test="authorities != null">
+		    #{authorities},
+	      </if>
+	      <if test="accessTokenValidity != null">
+		    #{accessTokenValidity},
+	      </if>
+	      <if test="refreshTokenValidity != null">
+		    #{refreshTokenValidity},
+	      </if>
+	      <if test="additionalInformation != null">
+		    #{additionalInformation},
+	      </if>
+	      <if test="autoApproveScopes != null">
+		    #{autoApproveScopes},
+	      </if>
+        </trim>
+	</insert>
+	
+    <insert id="insertList" parameterType="java.util.List">
+	    insert into <include refid="Table_Name" />
+          (
+            resourceIds,
+            appSecret,
+            scope,
+            grantTypes,
+            redirectUrl,
+            authorities,
+            access_token_validity,
+            refresh_token_validity,
+            additionalInformation,
+            autoApproveScopes
+          ) 
+	      values
+	    <foreach collection="list" item="item" separator=",">
+          (
+            #{item.resourceIds},
+            #{item.appSecret},
+            #{item.scope},
+            #{item.grantTypes},
+            #{item.redirectUrl},
+            #{item.authorities},
+            #{item.accessTokenValidity},
+            #{item.refreshTokenValidity},
+            #{item.additionalInformation},
+            #{item.autoApproveScopes}
+          )
+        </foreach>
+	</insert>
+
+	<update id="update" parameterType="com.yifan.po.ClientDetailsPo">
+	    update <include refid="Table_Name" />
+	    <set>
+        <if test="resourceIds != null">
+          resourceIds = #{resourceIds},
+        </if>
+        <if test="appSecret != null">
+          appSecret = #{appSecret},
+        </if>
+        <if test="scope != null">
+          scope = #{scope},
+        </if>
+        <if test="grantTypes != null">
+          grantTypes = #{grantTypes},
+        </if>
+        <if test="redirectUrl != null">
+          redirectUrl = #{redirectUrl},
+        </if>
+        <if test="authorities != null">
+          authorities = #{authorities},
+        </if>
+        <if test="accessTokenValidity != null">
+          access_token_validity = #{accessTokenValidity},
+        </if>
+        <if test="refreshTokenValidity != null">
+          refresh_token_validity = #{refreshTokenValidity},
+        </if>
+        <if test="additionalInformation != null">
+          additionalInformation = #{additionalInformation},
+        </if>
+        <if test="autoApproveScopes != null">
+          autoApproveScopes = #{autoApproveScopes},
+        </if>
+	    </set>
+	    where appId = #{appId}
+	</update>
+	
+	<select id="count" parameterType="com.yifan.po.ClientDetailsPo" resultType="java.lang.Integer">
+	    select count(1) from <include refid="Table_Name" />
+	    <where>
+	      <include refid="Base_Where" />
+	    </where>
+	</select>
+
+	<select id="selectOne" parameterType="com.yifan.po.ClientDetailsPo" resultMap="BaseResultMap">
+	    <include refid="Base_Select" />
+	</select>
+	
+	<select id="selectById" parameterType="String" resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column" />
+	    from <include refid="Table_Name" />
+	    where appId = #{appId}
+	</select>
+
+	<select id="selectList" parameterType="com.yifan.po.ClientDetailsPo" resultMap="BaseResultMap">
+	    <include refid="Base_Select" />
+	</select>
+	
+	<delete id="deleteById" parameterType="String">
+	    delete from <include refid="Table_Name" />
+        where appId = #{appId}
+	</delete>
+	
+</mapper>
